@@ -1,0 +1,103 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 15.04.0 ] */
+
+/* [wxMaxima: section start ]
+Interpolación Hermite tipo I
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: comment start ]
+Encontrar un polinomio p (de grado menor o igual que 2*N-1) tal que
+    - p(X[i]) = Y[i]
+    - p'(X[i]) = D[i]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+Resolvámoslo con estos datos de ejemplo: (0,1,1), (1,3,-1)
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+X:[0,1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Y:[1,3];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+D:[1,-1];
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+N es el número de datos menos 1
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+N:1;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hallamos los N+1 vectores de la base de Lagrange
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+L(i,x) := product((x-X[j])/(X[i]-X[j]),j,1,i-1) * product((x-X[j])/(X[i]-X[j]),j,i+1,N+1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+L: makelist(L(i,x),i,1,N+1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+También sus derivadas, que necesitaremos en cálculos posteriores
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+F: makelist(diff(L(i,x),x,1),i,1,N+1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Hallamos los polinomios de la base de Hermite, dependiendo de si el índice i es par o impar
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+H(i,x) := if (evenp(i)) then (1-2*(x-X[i/2])*ev(F[i/2], x=X[i/2]))*(L(i/2,x))^2 else (x-X[(i-1)/2])*(L((i-1)/2,x))^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Finalmente, aplicamos la fórmula, y ya tenemos el polinomio de interpolación de Hermite
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p(x) := sum(Y[i]*H(2*i,x) + D[i]*H(2*i+1,x),i,1,N+1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ratsimp(p(x));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Comprobamos que cumple las condiciones de interpolación:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+dp:ratsimp(diff(p(x),x,1));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+p(0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+p(1);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(dp, x=0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ev(dp, x=1);
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

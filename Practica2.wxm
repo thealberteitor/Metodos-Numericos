@@ -1,0 +1,213 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.01.0 ] */
+
+/* [wxMaxima: input   start ] */
+f(x):=3*x+sin(x)^2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+f(%pi/2);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+diff(f(x),x,3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrate(f(x), x, -%pi, %pi);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([f(x)], [x,-%pi,%pi])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+plot2d([f(x)], [x,-5,5],
+
+
+[plot_format, gnuplot])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+g(x):=if x<0 then -x^2+x else sin(x);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+g(1.0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([g(x)], [x,-3,6.6])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h(x):=if x<1 then x else
+
+
+if x<=2 then x^2/5 else exp(x/10);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+h(3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+wxplot2d([h(x)], [x,-5,5])$
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i:5 thru 12 do print(i-3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i:5 step 2 thru 12 do print(i-3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i:5 while i<13 do print(i-3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: title   start ]
+Ejemplos:
+
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: input   start ] */
+a:1/10.0*genmatrix(lambda([i,j], (i+j)/2), 3, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s:a^^0;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+for i:1 thru 100 do s:s+a^^i;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+s;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+invert(a^^0-a)-s;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+v:makelist(a^^i, i, 0, 100);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+apply("+",v);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+a: genmatrix(lambda([i,j], (-1)^(i+j)*i/j), 5, 5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+determinant(a);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n:5;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+v:makelist(apply("+",abs(a[i])),i,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+apply(max,v);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(b):=block(apply(max,makelist(apply("+",abs(b[i])),i,1,,matrix_size(b)[1])));
+
+
+matrix_size(b)[1])));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(a);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: title   start ]
+Ejercicios:
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: comment start ]
+1.- Calcula el error absoluto y relativo cuando se aproxima la inversa de la matriz 
+anterior (norma del máximo) por la truncatura considerada de la serie geométrica.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: comment start ]
+2.- Diseña un módulo que halle la norma 1 de una matriz cuadrada cualquiera.
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+normuno(b):=block(apply(max,makelist(apply("+",abs(b[j])),j,1,matrix_size(b)[2])));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+z:genmatrix(lambda([i,j], (i+j)), 4, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normuno(z);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(z);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+3.- Calcula el condicionamiento de las siguientes matrices para las
+normas 1 y del máximo:
+
+m: genmatrix(lambda([i,j], 0.3*i*j), 4, 4);
+
+n: genmatrix(lambda([i,j], (i-j)^i), 3, 3);
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(b):=block(apply(max,makelist(apply("+",abs(b[i])),i,1,matrix_size(b)[1])));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+m: genmatrix(lambda([i,j], 0.3*i*j), 4, 4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normuno(m);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(m);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n: genmatrix(lambda([i,j], (i-j)^i), 3, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normuno(n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+normmax(n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+SOLUCION DE LA PIZARRA:
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+a:genmatrix(lambda([i,j], (i+j)), 4, 4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x:makelist(apply("+",makelist(abs(a[i,j],i,1,matrix_size(a)[1])),j,1,matrix_size(a)[2]));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

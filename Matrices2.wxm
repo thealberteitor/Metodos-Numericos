@@ -1,0 +1,82 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 12.01.0 ] */
+
+/* [wxMaxima: input   start ] */
+a:genmatrix(lambda([i,j], -i+j^2), 3, 3);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+n:3;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Suma las columnas
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+v:makelist(apply("+",abs(a[j])),j,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist(a[j,1],j,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: comment start ]
+Suma las filas
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+w:makelist(apply("+",abs(a[i])),i,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+makelist(abs(a[i,1]),i,1,5);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+apply(max,v);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+w:makelist(apply("+",abs(a[j])),j,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+apply(max,w);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+m:genmatrix(lambda([i,j],0.3*i*j), 4, 4);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+m2:makelist(apply("+",abs(m[i])),i,1,n);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+apply(max,m2);
+/* [wxMaxima: input   end   ] */
+
+
+/* [wxMaxima: comment start ]
+pizarra matrix_size(a)[2]
+   [wxMaxima: comment end   ] */
+
+/* [wxMaxima: input   start ] */
+p:makelist(a[i,1],i,1,matrix_size(a)[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+q:makelist(abs(a[i,1]),i,1,matrix_size(a)[1]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+r:apply("+",makelist(abs(a[i,1]),i,1,matrix_size(a)[1]));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+v:makelist(apply("+",makelist(abs(a[i,j],i,1,matrix_size(a)[1])),j,1,matrix_size(a)[2]));
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$
